@@ -87,7 +87,7 @@ Mac sendArpRequest(const char* dev, Ip target_ip) {
         EthArpPacket* arp_packet = (EthArpPacket*)packet;
         if (arp_packet->eth_.type() != EthHdr::Arp) continue;
         if (arp_packet->arp_.op() != htons(ArpHdr::Reply)) continue;
-        if (arp_packet->arp_.sip() == htonl(target_ip)) {
+        if (arp_packet->arp_.sip() == (target_ip)) {
             pcap_close(handle);
             return arp_packet->arp_.smac();
         }
@@ -120,4 +120,3 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-
